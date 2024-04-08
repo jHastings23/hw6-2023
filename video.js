@@ -1,89 +1,61 @@
 
 window.addEventListener("load", function() {
-
 	var vid = document.getElementById("player1");
 
-	console.log("Good job opening the window");
-
-	console.log("Autoplay is set to false");
 	vid.autoplay = false;
-
-	console.log("Loop is set to false");
 	vid.loop = false;
 
-	function playVid() { 
-		console.log("Play Video");
+	function startPlayback() { 
 		vid.play();
 		document.querySelector("#volume").innerHTML = vid.volume*100 + "%"; 
 	} 
 	
-	function pauseVid() { 
-		console.log("Pause Video");
+	function stopPlayback() { 
 		vid.pause(); 
 	}
 
-	function slowerVid() { 
-		console.log("Slower Video");
+	function reduceSpeed() { 
 		vid.playbackRate *= 0.9;
-		console.log(vid.playbackRate);
 	}
 
-	function fasterVid() { 
-		console.log("Faster Video");
+	function increaseSpeed() { 
 		vid.playbackRate *= 1.1;
-		console.log(vid.playbackRate);
 	}
 
-	function skipVid() { 
-		console.log("Skip Video");
+	function jumpForward() { 
 		vid.currentTime += 10;
-		console.log(vid.currentTime);
 	}
 
-	function muteVid() {
+	function toggleMute() {
 		if(vid.muted == true) {
 			vid.muted = false;
-			console.log("Mute Video");
 			document.querySelector("#mute").textContent = "Mute";
 		} else {
 			vid.muted = true;
-			console.log("Unmute Video");
 			document.querySelector("#mute").textContent = "Unmute";
 		};
 	}
 
-	function changeVolume() {
+	function adjustVolume() {
 		vid.volume = document.querySelector("#slider").value/100;
 		document.querySelector("#volume").innerHTML = vid.volume*100 + "%";
-		console.log("The current value is " + vid.volume);
 	}
 
-	function oldSchool() {
-		console.log("Old School");
+	function applyVintageEffect() {
 		vid.className = "oldSchool";
 	}
 
-	function original() {
-		console.log("Original");
+	function applyOriginalEffect() {
 		vid.className = "video";
 	}
 
-	document.querySelector("#play").addEventListener("click", playVid);
-	
-	document.querySelector("#pause").addEventListener("click", pauseVid);
-
-	document.querySelector("#slower").addEventListener("click", slowerVid);
-
-	document.querySelector("#faster").addEventListener("click", fasterVid);
-
-	document.querySelector("#skip").addEventListener("click", skipVid);
-
-	document.querySelector("#mute").addEventListener("click", muteVid);
-
-	document.querySelector("#slider").addEventListener("change", changeVolume);
-
-	document.querySelector("#vintage").addEventListener("click", oldSchool);
-
-	document.querySelector("#orig").addEventListener("click", original);
-
+	document.querySelector("#play").addEventListener("click", startPlayback);
+	document.querySelector("#pause").addEventListener("click", stopPlayback);
+	document.querySelector("#slower").addEventListener("click", reduceSpeed);
+	document.querySelector("#faster").addEventListener("click", increaseSpeed);
+	document.querySelector("#skip").addEventListener("click", jumpForward);
+	document.querySelector("#mute").addEventListener("click", toggleMute);
+	document.querySelector("#slider").addEventListener("change", adjustVolume);
+	document.querySelector("#vintage").addEventListener("click", applyVintageEffect);
+	document.querySelector("#orig").addEventListener("click", applyOriginalEffect);
 });
